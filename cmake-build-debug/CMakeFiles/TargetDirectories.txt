@@ -1,0 +1,3 @@
+C:/Users/gusta/OneDrive - Grupo Marista/Documents/PUC/4 semestre/PI/CampoMinado/cmake-build-debug/CMakeFiles/CampoMinado.dir
+C:/Users/gusta/OneDrive - Grupo Marista/Documents/PUC/4 semestre/PI/CampoMinado/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/gusta/OneDrive - Grupo Marista/Documents/PUC/4 semestre/PI/CampoMinado/cmake-build-debug/CMakeFiles/rebuild_cache.dir
