@@ -20,28 +20,28 @@
 #include <stdio.h>
 #include <time.h>
 
-void impMatrix(int matriz[LINHAS][COLS]);
-void addBombs(int matrix[LINHAS][COLS]);
-int isBomb(int *ptr);
+void showMatriz(int matriz[LINHAS][COLS]);
+void addBombas(int matriz[LINHAS][COLS]);
+int isBomba(int *ptr);
 void getDicas(int matriz[LINHAS][COLS]);
 
 int main() {
-    int game[LINHAS][COLS];
+    int campo[LINHAS][COLS];
 
     for (int i = 0; i < LINHAS; i++) {
         for (int j = 0; j < COLS; j++) {
-            game[i][j] = 0;
+            campo[i][j] = 0;
         }
     }
 
-    impMatrix(game);
-    addBombs(game);
-    impMatrix(game);
+    showMatriz(campo);
+    addBombas(campo);
+    showMatriz(campo);
 
     return 0;
 }
 
-void impMatrix(int matriz[LINHAS][COLS]){
+void showMatriz(int matriz[LINHAS][COLS]){
     char x = 'A';
     int y = 1;
     printf("\n");
@@ -61,7 +61,7 @@ void impMatrix(int matriz[LINHAS][COLS]){
     }
 }
 
-void addBombs(int matriz[LINHAS][COLS]){
+void addBombas(int matriz[LINHAS][COLS]){
     int l,c;
     int i = 0;
     srand(time(NULL));
@@ -75,7 +75,7 @@ void addBombs(int matriz[LINHAS][COLS]){
     }
 }
 
-int isBomb(int *ptr) {
+int isBomba(int *ptr) {
     if (*ptr == 1) {
         return 0;
     } else {
