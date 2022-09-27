@@ -67,14 +67,12 @@ void getDicas(int matriz[LINHAS][COLS]) {
                         ptr++;
                         continue;
                     } else {
-                        if (*ptr == -1) {
-                            numBombas++;
-                        }
+                        if (*ptr == -1) numBombas++;
                         ptr++;
-                        }
                     }
                 }
             }
         }
     }
 }
+
