@@ -7,19 +7,15 @@
  * Revelar casas por jogada
  * Finalizar caso o usuario selecione uma bomba
  * Dar opcao de marcar casa com bandeira
- *
- * FACIL : 9X9, 10B
- * MEDIO: 16X16, 40B
- * DIFICIL: 16X30, 99B
  */
-#define BOMBAS 10
-#define LINHAS 10
+#define BOMBS 10
+#define ROWS 10
 #define COLS 10
 
 #include "stdio.h"
 
 int main() {
-    int game[LINHAS][COLS];
+    int game[ROWS][COLS];
     char x = 'A';
     int y = 1;
     printf("%4s", " ");
@@ -28,7 +24,7 @@ int main() {
         x++;
     }
     printf("\n");
-    for (int i = 0; i < LINHAS; i++) {
+    for (int i = 0; i < ROWS; i++) {
         printf("%2d |", y);
         y++;
         for (int j = 0; j < COLS; j++) {
@@ -43,36 +39,3 @@ int main() {
 void addBombs(){
 
 }
-
-int isBomb(int *ptr) {
-    if (*ptr == 1) {
-        return 0;
-    } else {
-        return 1;
-    }
-}
-
-void getDicas(int matriz[LINHAS][COLS]) {
-    int *ptr;
-    int numBombas = 0;
-
-    // percorre todas as linhas
-    for (int i = 0; i < LINHAS; i++) {
-        // percorre todas as colunas
-        for (int j = 0; j < COLS; j++) {
-            for (int k = i - 1; k < i + 2; k++) {
-                ptr = &matriz[k][j - 1];
-                while (ptr <= &matriz[k][j + 1]) {
-                    if (ptr == &matriz[i][j]) {
-                        ptr++;
-                        continue;
-                    } else {
-                        if (*ptr == -1) numBombas++;
-                        ptr++;
-                    }
-                }
-            }
-        }
-    }
-}
-
