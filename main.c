@@ -20,7 +20,12 @@
 #include <stdio.h>
 #include <time.h>
 
-int main() {
+void impMatrix(int matriz[LINHAS][COLS]);
+void addBombs(int matrix[LINHAS][COLS]);
+int isBomb(int *ptr);
+void getDicas(int matriz[LINHAS][COLS]);
+
+        int main() {
     int game[LINHAS][COLS];
     char x = 'A';
     int y = 1;
@@ -39,6 +44,9 @@ int main() {
         }
         printf("\n");
     }
+    addBombs(game);
+    impMatrix(game);
+
     return 0;
 }
 
@@ -62,7 +70,7 @@ void impMatrix(int matriz[LINHAS][COLS]){
     }
 }
 
-void addBombs(int matrix[LINHAS][COLS]){
+void addBombs(int matriz[LINHAS][COLS]){
     int l,c;
     int i = 0;
     srand(time(NULL));
