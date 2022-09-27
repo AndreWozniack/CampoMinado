@@ -27,13 +27,11 @@ void getDicas(int matriz[LINHAS][COLS]);
 
 int main() {
     int campo[LINHAS][COLS];
-
     for (int i = 0; i < LINHAS; i++) {
         for (int j = 0; j < COLS; j++) {
             campo[i][j] = 0;
         }
     }
-
     showMatriz(campo);
     addBombas(campo);
     showMatriz(campo);
@@ -105,6 +103,11 @@ void getDicas(int matriz[LINHAS][COLS]) {
             }
         }
     }
+
+    void verificVizinhos(){}
+
+
+
 }
 
 
