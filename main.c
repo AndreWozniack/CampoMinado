@@ -25,25 +25,16 @@ void addBombs(int matrix[LINHAS][COLS]);
 int isBomb(int *ptr);
 void getDicas(int matriz[LINHAS][COLS]);
 
-        int main() {
+int main() {
     int game[LINHAS][COLS];
-    char x = 'A';
-    int y = 1;
-    printf("%4s", " ");
-    for (int k = 0; k < COLS; k++) {
-        printf("%2c ", x);
-        x++;
-    }
-    printf("\n");
+
     for (int i = 0; i < LINHAS; i++) {
-        printf("%2d |", y);
-        y++;
         for (int j = 0; j < COLS; j++) {
             game[i][j] = 0;
-            printf("%2d ", game[i][j]);
         }
-        printf("\n");
     }
+
+    impMatrix(game);
     addBombs(game);
     impMatrix(game);
 
@@ -77,8 +68,8 @@ void addBombs(int matriz[LINHAS][COLS]){
     while (i < BOMBAS) {
         l = rand() % LINHAS;
         c = rand() % COLS;
-        if (matrix[l][c] == 0){
-            matrix[l][c] = -1;
+        if (matriz[l][c] == 0){
+            matriz[l][c] = -1;
             i++;
         }
     }
