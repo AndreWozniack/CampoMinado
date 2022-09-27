@@ -32,6 +32,7 @@ int main() {
             campo[i][j] = 0;
         }
     }
+
     showMatriz(campo);
     addBombas(campo);
     showMatriz(campo);
@@ -71,7 +72,6 @@ void addBombas(int matriz[LINHAS][COLS]){
             i++;
         }
     }
-    return numBombas;
 }
 
 int isBomba(const int *ptr) {
@@ -108,10 +108,10 @@ int getDicas(int matriz[LINHAS][COLS]) {
             }
         }
     }
+    return numBombas;
+}
 
-    void verificVizinhos(){}
-
-
+void verificVizinhos(){
 
 }
 
