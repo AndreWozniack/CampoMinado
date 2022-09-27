@@ -1,6 +1,13 @@
-//
-// Created by gusta on 22/09/2022.
-//
+/*
+ * REQUISITOS
+ * Criar matriz com bombas (back-end)
+ * Criar matriz de jogo (front-end)
+ * Sortear bombas na matriz back
+ * Inserir numero de bombas ao redor de cada casa
+ * Revelar casas por jogada
+ * Finalizar caso o usuario selecione uma bomba
+ * Dar opcao de marcar casa com bandeira
+ */
 #define BOMBS 10
 #define ROWS 10
 #define COLS 10
