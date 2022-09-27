@@ -22,8 +22,8 @@
 
 void showMatriz(int matriz[LINHAS][COLS]);
 void addBombas(int matriz[LINHAS][COLS]);
-int isBomba(int *ptr);
-void getDicas(int matriz[LINHAS][COLS]);
+int isBomba(const int *ptr);
+int getDicas(int matriz[LINHAS][COLS]);
 
 int main() {
     int campo[LINHAS][COLS];
@@ -71,9 +71,10 @@ void addBombas(int matriz[LINHAS][COLS]){
             i++;
         }
     }
+    return numBombas;
 }
 
-int isBomba(int *ptr) {
+int isBomba(const int *ptr) {
     if (*ptr == 1) {
         return 0;
     } else {
@@ -81,7 +82,7 @@ int isBomba(int *ptr) {
     }
 }
 
-void getDicas(int matriz[LINHAS][COLS]) {
+int getDicas(int matriz[LINHAS][COLS]) {
     int *ptr;
     int numBombas = 0;
 
@@ -90,14 +91,18 @@ void getDicas(int matriz[LINHAS][COLS]) {
         // percorre todas as colunas
         for (int j = 0; j < COLS; j++) {
             for (int k = i - 1; k < i + 2; k++) {
-                ptr = &matriz[k][j - 1];
-                while (ptr <= &matriz[k][j + 1]) {
-                    if (ptr == &matriz[i][j]) {
-                        ptr++;
-                        continue;
-                    } else {
-                        if (*ptr == -1) numBombas++;
-                        ptr++;
+                if (k > 0 && k < LINHAS) {
+                    if (j - 1 > 0 && j + 1 < COLS) {
+                        ptr = &matriz[k][j - 1];
+                        while (ptr <= &matriz[k][j + 1]) {
+                            if (ptr == &matriz[i][j]) {
+                                ptr++;
+                                continue;
+                            } else {
+                                if (*ptr == -1) numBombas++;
+                                ptr++;
+                            }
+                        }
                     }
                 }
             }
