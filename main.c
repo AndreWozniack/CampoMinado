@@ -16,7 +16,9 @@
 #define LINHAS 10
 #define COLS 10
 
-#include "stdio.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <time.h>
 
 int main() {
     int game[LINHAS][COLS];
@@ -40,8 +42,38 @@ int main() {
     return 0;
 }
 
-void addBombs(){
+void impMatrix(int matriz[LINHAS][COLS]){
+    char x = 'A';
+    int y = 1;
+    printf("\n");
+    printf("%4s", " ");
+    for (int k = 0; k < COLS; k++) {
+        printf("%2c ", x);
+        x++;
+    }
+    printf("\n");
+    for (int i = 0; i < LINHAS; i++) {
+        printf("%2d |", y);
+        y++;
+        for (int j = 0; j < COLS; j++) {
+            printf("%2d ", matriz[i][j]);
+        }
+        printf("\n");
+    }
+}
 
+void addBombs(int matrix[LINHAS][COLS]){
+    int l,c;
+    int i = 0;
+    srand(time(NULL));
+    while (i < BOMBAS) {
+        l = rand() % LINHAS;
+        c = rand() % COLS;
+        if (matrix[l][c] == 0){
+            matrix[l][c] = -1;
+            i++;
+        }
+    }
 }
 
 int isBomb(int *ptr) {
@@ -75,4 +107,6 @@ void getDicas(int matriz[LINHAS][COLS]) {
         }
     }
 }
+
+
 
