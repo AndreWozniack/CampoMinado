@@ -22,8 +22,8 @@
 
 void showMatriz(int matriz[LINHAS][COLS]);
 void addBombas(int matriz[LINHAS][COLS]);
-int isBomba(const int *ptr);
-int getDicas(int matriz[LINHAS][COLS]);
+int isBomba(int valor);
+void setDicas(int matriz[LINHAS][COLS]);
 
 int main() {
     int campo[LINHAS][COLS];
@@ -35,6 +35,8 @@ int main() {
 
     showMatriz(campo);
     addBombas(campo);
+    showMatriz(campo);
+    setDicas(campo);
     showMatriz(campo);
 
     return 0;
@@ -74,41 +76,35 @@ void addBombas(int matriz[LINHAS][COLS]){
     }
 }
 
-int isBomba(const int *ptr) {
-    if (*ptr == 1) {
+int isBomba(int valor) {
+    if (valor == -1) {
         return 0;
     } else {
         return 1;
     }
 }
 
-int getDicas(int matriz[LINHAS][COLS]) {
-    int *ptr;
-    int numBombas = 0;
-
-    // percorre todas as linhas
+void setDicas(int matriz[LINHAS][COLS]) {
     for (int i = 0; i < LINHAS; i++) {
-        // percorre todas as colunas
         for (int j = 0; j < COLS; j++) {
-            for (int k = i - 1; k < i + 2; k++) {
-                if (k > 0 && k < LINHAS) {
-                    if (j - 1 > 0 && j + 1 < COLS) {
-                        ptr = &matriz[k][j - 1];
-                        while (ptr <= &matriz[k][j + 1]) {
-                            if (ptr == &matriz[i][j]) {
-                                ptr++;
-                                continue;
-                            } else {
-                                if (*ptr == -1) numBombas++;
-                                ptr++;
+            int numBombas = 0;
+            for (int a = i - 1; a < i + 2; a++) {
+                for (int b = j - 1; b < j + 2; b++) {
+
+                    if (a >= 0 && a < LINHAS) {
+                        if (b >= 0 && b < COLS) {
+                            if (a == i && b == j) continue;
+
+                            else if (isBomba(matriz[a][b]) == 0) {
+                                numBombas++;
                             }
                         }
                     }
                 }
             }
+            if (matriz[i][j] != -1) matriz[i][j] = numBombas;
         }
     }
-    return numBombas;
 }
 
 void verificVizinhos(){
