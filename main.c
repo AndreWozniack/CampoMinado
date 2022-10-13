@@ -13,36 +13,51 @@
  * DIFICIL: 16X30, 99B
  */
 #define BOMBAS 10
-#define LINHAS 10
-#define COLS 10
+#define LINHAS 9
+#define COLS 9
 
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
 
-void showMatriz(int matriz[LINHAS][COLS]);
+void showMatrizCampo(int matriz[LINHAS][COLS]);
 void addBombas(int matriz[LINHAS][COLS]);
 int isBomba(int valor);
 void setDicas(int matriz[LINHAS][COLS]);
+void showMatrizTela(char matriz[LINHAS][COLS]);
+//void abrirCasas(int l, int c, int campo[LINHAS][COLS], char tela[LINHAS][COLS]);
 
 int main() {
     int campo[LINHAS][COLS];
+    char tela[LINHAS][COLS];
+    char casa[2];
     for (int i = 0; i < LINHAS; i++) {
         for (int j = 0; j < COLS; j++) {
             campo[i][j] = 0;
+            tela[i][j] = '-';
         }
     }
-
-    showMatriz(campo);
     addBombas(campo);
-    showMatriz(campo);
     setDicas(campo);
-    showMatriz(campo);
 
+    showMatrizCampo(campo);
+    showMatrizTela(tela);
+
+    //abrirCasas(2, 2, campo, tela);
+    showMatrizTela(tela);
+    /*,
+    printf("\nEscolha uma casa:");
+    gets(casa);
+    printf("%s",casa);
+    for (int i = 0; i < sizeof(casa); ++i) {
+        printf("%c ",casa[i]);
+    }
+     */
     return 0;
+
 }
 
-void showMatriz(int matriz[LINHAS][COLS]){
+void showMatrizCampo(int matriz[LINHAS][COLS]){
     char x = 'A';
     int y = 1;
     printf("\n");
@@ -57,6 +72,26 @@ void showMatriz(int matriz[LINHAS][COLS]){
         y++;
         for (int j = 0; j < COLS; j++) {
             printf("%2d ", matriz[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+void showMatrizTela(char matriz[LINHAS][COLS]){
+    char x = 'A';
+    int y = 1;
+    printf("\n");
+    printf("%4s", " ");
+    for (int k = 0; k < COLS; k++) {
+        printf("%2c ", x);
+        x++;
+    }
+    printf("\n");
+    for (int i = 0; i < LINHAS; i++) {
+        printf("%2d |", y);
+        y++;
+        for (int j = 0; j < COLS; j++) {
+            printf("%2c ", matriz[i][j]);
         }
         printf("\n");
     }
@@ -90,11 +125,9 @@ void setDicas(int matriz[LINHAS][COLS]) {
             int numBombas = 0;
             for (int a = i - 1; a < i + 2; a++) {
                 for (int b = j - 1; b < j + 2; b++) {
-
                     if (a >= 0 && a < LINHAS) {
                         if (b >= 0 && b < COLS) {
                             if (a == i && b == j) continue;
-
                             else if (isBomba(matriz[a][b]) == 0) {
                                 numBombas++;
                             }
@@ -107,9 +140,15 @@ void setDicas(int matriz[LINHAS][COLS]) {
     }
 }
 
-void verificVizinhos(){
-
+/*
+void abrirCasas(int l, int c, int campo[LINHAS][COLS], char tela[LINHAS][COLS]){
+    for (int linha = 0; linha < LINHAS; ++linha) {
+        for (int col = 0; col < COLS; ++col) {
+            if (campo[linha][col])
+        }
+    }
 }
+*/
 
 
 
