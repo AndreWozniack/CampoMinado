@@ -25,7 +25,7 @@ void addBombas(int matriz[LINHAS][COLS]);
 int isBomba(int valor);
 void setDicas(int matriz[LINHAS][COLS]);
 void showMatrizTela(char matriz[LINHAS][COLS]);
-//void abrirCasas(int l, int c, int campo[LINHAS][COLS], char tela[LINHAS][COLS]);
+void abrirCasas(int l, int c, int campo[LINHAS][COLS], char tela[LINHAS][COLS]);
 
 int main() {
     int campo[LINHAS][COLS];
@@ -39,36 +39,37 @@ int main() {
     }
     addBombas(campo);
     setDicas(campo);
-
+    abrirCasas(2, 2, campo, tela);
+    showMatrizTela(tela);
     showMatrizCampo(campo);
-    showMatrizTela(tela);
-
-    //abrirCasas(2, 2, campo, tela);
-    showMatrizTela(tela);
-    /*,
+/*
     printf("\nEscolha uma casa:");
     gets(casa);
     printf("%s",casa);
     for (int i = 0; i < sizeof(casa); ++i) {
         printf("%c ",casa[i]);
     }
-     */
+*/
     return 0;
 
 }
-
 void showMatrizCampo(int matriz[LINHAS][COLS]){
-    char x = 'A';
-    int y = 1;
+    char y = 'A';
+    int x = 1;
     printf("\n");
     printf("%4s", " ");
     for (int k = 0; k < COLS; k++) {
-        printf("%2c ", x);
+        printf("%2d ", x);
         x++;
     }
     printf("\n");
+    printf("%4s", " ");
+    for (int i = 0; i < COLS; ++i) {
+        printf(" _ ");
+    }
+    printf("\n");
     for (int i = 0; i < LINHAS; i++) {
-        printf("%2d |", y);
+        printf("%2c |", y);
         y++;
         for (int j = 0; j < COLS; j++) {
             printf("%2d ", matriz[i][j]);
@@ -76,19 +77,24 @@ void showMatrizCampo(int matriz[LINHAS][COLS]){
         printf("\n");
     }
 }
-
 void showMatrizTela(char matriz[LINHAS][COLS]){
-    char x = 'A';
-    int y = 1;
+    char y = 'A';
+    int x = 1;
     printf("\n");
     printf("%4s", " ");
     for (int k = 0; k < COLS; k++) {
-        printf("%2c ", x);
+        printf("%2d ", x);
         x++;
     }
     printf("\n");
+    printf("%4s", " ");
+    for (int i = 0; i < COLS; ++i) {
+        printf(" _ ");
+    }
+
+    printf("\n");
     for (int i = 0; i < LINHAS; i++) {
-        printf("%2d |", y);
+        printf("%2c |", y);
         y++;
         for (int j = 0; j < COLS; j++) {
             printf("%2c ", matriz[i][j]);
@@ -96,7 +102,6 @@ void showMatrizTela(char matriz[LINHAS][COLS]){
         printf("\n");
     }
 }
-
 void addBombas(int matriz[LINHAS][COLS]){
     int l,c;
     int i = 0;
@@ -110,7 +115,6 @@ void addBombas(int matriz[LINHAS][COLS]){
         }
     }
 }
-
 int isBomba(int valor) {
     if (valor == -1) {
         return 0;
@@ -118,7 +122,6 @@ int isBomba(int valor) {
         return 1;
     }
 }
-
 void setDicas(int matriz[LINHAS][COLS]) {
     for (int i = 0; i < LINHAS; i++) {
         for (int j = 0; j < COLS; j++) {
@@ -140,15 +143,27 @@ void setDicas(int matriz[LINHAS][COLS]) {
     }
 }
 
-/*
 void abrirCasas(int l, int c, int campo[LINHAS][COLS], char tela[LINHAS][COLS]){
-    for (int linha = 0; linha < LINHAS; ++linha) {
-        for (int col = 0; col < COLS; ++col) {
-            if (campo[linha][col])
+    if(campo[l][c] > 0) {
+        tela[l][c] = ((char) campo[l][c]) + 48;
+    }
+    if(campo[l][c] == 0){
+        tela[l][c] = 'O';
+        for (int i = l-1; i < l+2 ; i++) {
+            for (int j = c-1; j < c+2; j++) {
+                if(campo[i][j] > 0){
+                    tela[i][j] = ((char) campo[i][j]) + 48;
+                }
+                if(i >= 0 && i < LINHAS && j >= 0 && j < COLS){
+                    if(campo[i][j] == 0 && tela[i][j] != 'O'){
+                        abrirCasas(i,j,campo,tela);
+                    }
+
+                }
+            }
         }
     }
 }
-*/
 
 
 
