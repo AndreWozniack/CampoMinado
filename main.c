@@ -41,7 +41,6 @@ int main() {
     setDicas(campo);
     abrirCasas(2, 2, campo, tela);
     showMatrizTela(tela);
-    showMatrizCampo(campo);
 /*
     printf("\nEscolha uma casa:");
     gets(casa);
@@ -143,18 +142,19 @@ void setDicas(int matriz[LINHAS][COLS]) {
     }
 }
 
+
 void abrirCasas(int l, int c, int campo[LINHAS][COLS], char tela[LINHAS][COLS]){
     if(campo[l][c] > 0) {
         tela[l][c] = ((char) campo[l][c]) + 48;
     }
     if(campo[l][c] == 0){
         tela[l][c] = 'O';
-        for (int i = l-1; i < l+2 ; i++) {
-            for (int j = c-1; j < c+2; j++) {
-                if(campo[i][j] > 0){
-                    tela[i][j] = ((char) campo[i][j]) + 48;
-                }
+        for (int i = l-1; i < l+2 ; ++i) {
+            for (int j = c-1; j < c+2; ++j) {
                 if(i >= 0 && i < LINHAS && j >= 0 && j < COLS){
+                    if(campo[i][j] > 0) {
+                        tela[i][j] = ((char) campo[i][j])+48;
+                    }
                     if(campo[i][j] == 0 && tela[i][j] != 'O'){
                         abrirCasas(i,j,campo,tela);
                     }
