@@ -19,6 +19,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <time.h>
+#include <xlocinfo.h>
 
 void showMatrizCampo(int matriz[LINHAS][COLS]);
 void addBombas(int matriz[LINHAS][COLS]);
@@ -26,6 +27,12 @@ int isBomba(int valor);
 void setDicas(int matriz[LINHAS][COLS]);
 void showMatrizTela(char matriz[LINHAS][COLS]);
 void abrirCasas(int l, int c, int campo[LINHAS][COLS], char tela[LINHAS][COLS]);
+int convertLetra(char x);
+int getLinha();
+int getColuna();
+void getCasa(char casa[2]);
+
+
 
 int main() {
     int campo[LINHAS][COLS];
@@ -37,18 +44,12 @@ int main() {
             tela[i][j] = '-';
         }
     }
+
     addBombas(campo);
     setDicas(campo);
-    abrirCasas(2, 2, campo, tela);
     showMatrizTela(tela);
-/*
-    printf("\nEscolha uma casa:");
-    gets(casa);
-    printf("%s",casa);
-    for (int i = 0; i < sizeof(casa); ++i) {
-        printf("%c ",casa[i]);
-    }
-*/
+    getCasa(casa);
+
     return 0;
 
 }
@@ -141,8 +142,6 @@ void setDicas(int matriz[LINHAS][COLS]) {
         }
     }
 }
-
-
 void abrirCasas(int l, int c, int campo[LINHAS][COLS], char tela[LINHAS][COLS]){
     if(campo[l][c] > 0) {
         tela[l][c] = ((char) campo[l][c]) + 48;
@@ -164,6 +163,49 @@ void abrirCasas(int l, int c, int campo[LINHAS][COLS], char tela[LINHAS][COLS]){
         }
     }
 }
+int verificaCasa(){
 
+}
 
-
+int convertLetra(char x){
+    int numero;
+    if(islower(x)){
+        x = toupper(x);
+    }
+    for (int i = 65; i < 91; ++i) {
+        if(x == i){
+            numero = i-65;
+        }
+    }
+    return numero;
+}
+int getLinha() {
+    char linha;
+    int linhaN;
+    printf("\nEscolha uma linha \n(Ex. A, B, c): ");
+    scanf("%c", &linha);
+    linhaN = convertLetra((char) linha);
+    if(linhaN <= LINHAS){
+        return linhaN;
+    } else{
+        return -1;
+    }
+}
+int getColuna() {
+    int coluna;
+    printf("Digite a Coluna\n(Ex. 1,2,3): ");
+    scanf("%d", &coluna);
+    if(coluna <= COLS){
+        return coluna;
+    } else{
+        return -1;
+    }
+}
+void getCasa(char casa[2]){
+    for (int i = 0; i < 2; ++i) {
+        switch (i) {
+            case 1: casa[i] = getLinha();
+            case 2: casa[i] = getColuna();
+        }
+    }
+}
